@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>DRINKKIARKISTO</title>
+		<meta charset="utf-8" />
+		<style>
+                @charset "utf-8";
+		body {
+			background-color:gray;
+		}
+
+		#wrapper {
+			margin:auto;
+			padding:50px;
+		}
+
+		#content {
+			background-color:white;
+			margin:auto;
+			width:50%;
+			color:black;
+			padding:20px;
+			overflow:auto;
+		}
+
+		h1, h2 {
+			color:#33ccff;
+		}
+
+		a:link {
+			color:#ff9900;
+		}
+
+		a:visited {
+			color:#ff9900;
+		}
+
+		a:hover {
+			color:#cc7a00;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="content">
+				<div style="float:left;">
+				<h1>DRINKKIARKISTO</h1>
+				<h2>Drinkit</h2>
+				<ul>
+					<li th:each="drinkki : ${drinkit}">
+						<a th:href="@{~/drinkit/{drinkkiId}(drinkkiId=${drinkki.id})}"><span th:text="${drinkki.nimi}">esimerkki</span></a> (<a th:href="@{~/drinkit/{drinkkiId}/delete(drinkkiId=${drinkki.id})}">poista</a>)
+					</li>
+				</ul>
+                                <h2>Lisää drinkki</h2>
+                                <form method="POST" action="drinkit/add">
+                                    Drinkin nimi:<br/>
+                                    <input type="text" name="nimi"/><br/>
+                                    <input type="submit" value="Lisää"/>
+                                </form>
+				<h2>Lisää aineksia</h2>
+                                <form method="POST" th:action="@{~/drinkit}">
+                                    Drinkki:<br/>
+                                    <select name="drinkki">
+                                        <option th:each="drinkki : ${drinkit}" th:value="${drinkki.id}" th:text="${drinkki.nimi}">esimerkki</option>
+                                    </select><br/>
+                                    Lisättävä ainesosa:<br/>
+                                    <select name="ainesosa">
+                                        <option th:each="raakaaine : ${raakaaineet}" th:value="${raakaaine.id}" th:text="${raakaaine.nimi}">esimerkki</option>
+                                    </select><br/>
+                                    Järjestys<br/>
+                                    <input type="number" name="jarjestys"/><br/>
+                                    Määrä<br/>
+                                    <input type="text" name="maara"/><br/>
+                                    Ohje<br/>
+                                    <input type="text" name="ohje"/><br/>
+                                    <input type="submit" value="Lisää"/>
+                                </form>
+                                <a href="/">Palaa etusivulle</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
