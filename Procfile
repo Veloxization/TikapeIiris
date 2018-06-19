@@ -1,1 +1,1 @@
-web:    java -cp target/classes:target/dependency/* veloxization.tikape.Main
+web:    java -cp target/classes:target/dependency/* veloxization.tikapeiiris.Main
